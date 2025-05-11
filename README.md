@@ -175,6 +175,50 @@ pnpm lint
 - API 测试：`*.test.ts`
 - 集成测试：`*.integration.test.ts`
 
+## API 文档
+
+项目提供完整的 OpenAPI 规范文档和 Postman 集合：
+
+- [API 文档](docs/api/api-documentation.md)
+- [OpenAPI 规范](docs/api/openapi.json) 
+- [Postman 集合](docs/api/postman_collection.json)
+
+## 数据库初始化
+
+项目提供多种数据库种子脚本：
+
+```bash
+# 使用200个商品数据初始化数据库
+pnpm seed:products200
+
+# 使用完整商品数据初始化数据库
+pnpm seed:products
+```
+
+## 系统架构
+
+项目架构文档和图表位于 `docs/architecture/` 目录：
+
+- [系统架构图](docs/architecture/system-architecture.md)
+- [ER 模型图](docs/architecture/ER-model.puml)
+- [C4 模型图](docs/architecture/c4-model.puml)
+
+## 环境变量配置
+
+复制 `.env.example` 文件并重命名为 `.env.local`，然后配置以下变量：
+
+```
+MONGODB_URI=mongodb://localhost:27017/shopping-system
+JWT_SECRET=your_jwt_secret_here
+NEXTAUTH_SECRET=your_nextauth_secret_here
+NEXTAUTH_URL=http://localhost:3000
+```
+
+## 项目截图
+
+![商品列表](apps/web/public/hero-banner.jpg)
+![购物车](apps/web/public/electronics.jpg)
+
 ## 贡献指南
 
 1. Fork 项目
