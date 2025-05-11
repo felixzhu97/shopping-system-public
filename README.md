@@ -214,10 +214,8 @@ NEXTAUTH_SECRET=your_nextauth_secret_here
 NEXTAUTH_URL=http://localhost:3000
 ```
 
-## 项目截图
-
-![商品列表](apps/web/public/hero-banner.jpg)
-![购物车](apps/web/public/electronics.jpg)
+## 项目访问链接
+https://felixzhu.shop
 
 ## 贡献指南
 
