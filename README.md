@@ -208,7 +208,7 @@ pnpm seed:products
 复制 `.env.example` 文件并重命名为 `.env.local`，然后配置以下变量：
 
 ```
-MONGODB_URI=mongodb://localhost:27017/shopping-system
+MONGODB_URI=mongodb://localhost:27017/shopping-system-public
 JWT_SECRET=your_jwt_secret_here
 NEXTAUTH_SECRET=your_nextauth_secret_here
 NEXTAUTH_URL=http://localhost:3000
