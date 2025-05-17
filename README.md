@@ -50,6 +50,12 @@ shopping-system/
 - 订单处理
 - 数据验证和错误处理
 
+## 项目架构
+![c4-model.svg](docs/architecture/c4-model.svg)
+
+## 数据库关系
+![ER-model.svg](docs/architecture/ER-model.svg)
+
 ## 配置说明
 
 ### Turborepo 配置

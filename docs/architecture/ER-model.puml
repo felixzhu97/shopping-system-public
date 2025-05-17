@@ -8,7 +8,9 @@ LAYOUT_WITH_LEGEND()
 ' 数据库模型图
 Container_Boundary(database, "数据库模型") {
     Component(user, "User", "Mongoose Schema", "用户信息") {
-        Component(user_fields, "字段", "Schema", "email, password, role, firstName, lastName, phone, address, city, province, postalCode, country, paymentMethod")
+        Component(user_fields, "字段", "Schema", "email, password, role, firstName, lastName, phone")
+        Component(user_addresses, "Addresses", "Schema", "address, city, province, postalCode, isDefault")
+        Component(user_payments, "PaymentMethods", "Schema", "type, isDefault")
     }
 
     Component(product, "Product", "Mongoose Schema", "商品信息") {
@@ -16,25 +18,37 @@ Container_Boundary(database, "数据库模型") {
     }
 
     Component(order, "Order", "Mongoose Schema", "订单信息") {
-        Component(order_fields, "字段", "Schema", "userId, items[], totalAmount, status")
-        Component(order_item, "OrderItem", "Schema", "productId, name, image, price, quantity, description")
+        Component(order_fields, "字段", "Schema", "userId, orderItems[], totalAmount, status")
+        Component(order_item, "OrderItem", "Schema", "productId, name, price, quantity, image")
+        Component(order_shipping, "ShippingAddress", "Schema", "从用户地址复制")
+        Component(order_payment, "PaymentDetails", "Schema", "从用户支付方式复制, status, paidAt")
     }
 
     Component(cart, "Cart", "Mongoose Schema", "购物车信息") {
         Component(cart_fields, "字段", "Schema", "userId, items[]")
         Component(cart_item, "CartItem", "Schema", "productId, quantity")
     }
-
-    Component(payment, "Payment", "Mongoose Schema", "支付信息") {
-        Component(payment_fields, "字段", "Schema", "userId, firstName, lastName, email, phone, address, city, province, postalCode, paymentMethod")
-    }
 }
 
-Rel(user, product, "1:N", "创建/管理")
+' 组件关系
 Rel(user, order, "1:N", "创建/查看")
 Rel(user, cart, "1:1", "拥有")
-Rel(user, payment, "1:N", "创建/查看")
 Rel(product, order, "1:N", "被订购")
 Rel(product, cart, "1:N", "被添加")
+
+' API服务组件图
+Container_Boundary(api_boundary, "API服务") {
+    Component(user_controller, "UserController", "TypeScript", "处理用户、地址和支付方式")
+    Component(order_controller, "OrderController", "TypeScript", "处理订单业务逻辑")
+    Component(api_error, "ApiError", "TypeScript", "统一错误处理")
+}
+
+' 组件交互
+Rel(user_controller, user, "管理", "CRUD")
+Rel(order_controller, order, "管理", "CRUD")
+Rel(order_controller, user_controller, "使用", "获取用户信息")
+Rel(user_controller, api_error, "使用", "错误处理")
+Rel(order_controller, api_error, "使用", "错误处理")
+
 
 @enduml
